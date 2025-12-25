@@ -375,7 +375,7 @@ void slash_path_completer(struct slash * slash, char * token) {
                 /* allocate more memory if necessary */
                 if (match_count+1 >= match_list_size) {
                     match_list_size += 16;
-                    char** tmp = (char**) reallocarray(match_list, match_list_size, sizeof(char*));
+                    char** tmp = (char**) realloc(match_list, match_list_size * sizeof(char*));
                     if (tmp == NULL) {
                         printf("Unable to find all matches: No memory\n");
                         break;
@@ -385,7 +385,7 @@ void slash_path_completer(struct slash * slash, char * token) {
                 char *match_tmp = (char*)malloc(strlen(pmatch) + 3);
                 if(match_tmp) {
                     match_list[match_count] = match_tmp;
-                    strcpy(match_list[match_count], pmatch); 
+                    strcpy(match_list[match_count], pmatch);
                     if (entry->d_type == DT_DIR) {
                         strcat(match_list[match_count], "/");
                     }
