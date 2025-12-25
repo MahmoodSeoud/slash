@@ -339,7 +339,7 @@ void slash_path_completer(struct slash * slash, char * token) {
             /* allocate more memory if necessary */
             if (match_count+1 >= match_list_size) {
                 match_list_size += 16;
-                char** tmp = (char**) reallocarray(match_list, match_list_size, sizeof(char*));
+                char** tmp = (char**) realloc(match_list, match_list_size * sizeof(char*));
                 if (tmp == NULL) {
                     printf("Unable to find all matches: No memory\n");
                     break;

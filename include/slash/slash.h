@@ -51,8 +51,14 @@
 	__typeof__ (b) _b = (b); \
 	_a < _b ? _a : _b; })
 
+#ifdef __APPLE__
+#define SLASH_SECTION_ATTR __attribute__((section("__DATA,slash")))
+#else
+#define SLASH_SECTION_ATTR __attribute__((section("slash")))
+#endif
+
 #define __slash_command(_ident, _name, _func, _completer, _args, _help) 	\
-	__attribute__((section("slash")))\
+	SLASH_SECTION_ATTR\
 	__attribute__((aligned(4)))\
 	__attribute__((used))\
 	const struct slash_command _ident = {\
